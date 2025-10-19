@@ -14,6 +14,7 @@ import {
   parseAndValidateLimit,
   parseAndValidatePage,
 } from "../../../../helpers";
+import { success } from "zod";
 
 type ResponseBody = IFilterBoardResponseBody | IApiErrorResponse;
 
@@ -48,7 +49,11 @@ export async function filter(
       .limit(limit)
       .offset(limit * (page - 1));
 
-    res.status(200).send({ boards });
+    res.status(200).send({status: {
+      code: 200,
+      type: "success"
+    },
+       boards });
   } catch (err) {
     logger.log({
       level: "error",

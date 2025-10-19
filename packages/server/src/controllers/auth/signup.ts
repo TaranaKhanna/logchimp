@@ -21,7 +21,9 @@ export async function signup(
   res: Response<ResponseBody>,
   next: NextFunction,
 ) {
-  const { email, password } = req.body;
+  const { email: _email, password } = req.body;
+
+  const email = typeof _email === "string" ? _email.toLowerCase() : "";
 
   if (!validEmail(email)) {
     return res.status(400).send({

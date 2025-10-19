@@ -12,11 +12,14 @@ export async function userExists(
   res: Response<IApiErrorResponse>,
   next: NextFunction,
 ) {
-  let email = (
+  let _email = (
     (req.body ? req.body.email : "") ||
     // @ts-expect-error
     (req.user ? req.user.email : "")
   ).toLowerCase();
+
+  let email = typeof _email === "string" ? _email.toLowerCase() : "";
+
 
   // As of now it only handles if the user_id is a param
   let id = req.params.user_id;
