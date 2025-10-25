@@ -212,6 +212,7 @@ async function updateSettingsHandler() {
       accentColor.error.show = true;
       accentColor.error.message = "Required";
     }
+    return;
   }
 
   updateSettingsButtonLoading.value = true;
@@ -225,7 +226,7 @@ async function updateSettingsHandler() {
     allowSignup: allowSignup.value,
     developer_mode: developer_mode.value,
   };
-
+  console.log("siteData: ", siteData);
   try {
     const response = await updateSettings(siteData);
 
